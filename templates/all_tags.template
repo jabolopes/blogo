@@ -1,0 +1,7 @@
+{{define "content"}}<h3>All tags</h3>
+
+<ul>
+  {{range .Tags}}<li><a href="{{.Href}}">{{.Name}}</a> &mdash; {{.Count}}</li>
+  {{end}}
+</ul>
+{{end}}
