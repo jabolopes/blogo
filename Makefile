@@ -26,9 +26,7 @@ out/blogo: $(SRC_BLOGO) | out
 # blog contents
 
 out/%.pre: %.md out/blogo
-	( echo -n '### '; cat $< ) | $(md) | \
-		sed -e 's|<h3>|<h3><a href="$(basename $(notdir $@)).html">|' \
-			-e 's|</h3>|</a></h3>|' | out/blogo tagify > $@
+	( out/blogo postify --titleHref="$(basename $(notdir $@)).html" | $(md) ) < $< > $@
 
 out/dist/%.html: %.md out/%.pre out/blogo | out/dist
 	out/blogo gen-post $< > $@

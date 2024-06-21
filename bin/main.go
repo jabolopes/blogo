@@ -56,6 +56,9 @@ func main() {
 	genTagCmd := flag.NewFlagSet("gen-tag", flag.ExitOnError)
 	out := genTagCmd.String("out", "", "Output directory, e.g., 'out/'")
 
+	postifyCmd := flag.NewFlagSet("postify", flag.ExitOnError)
+	titleHref := postifyCmd.String("titleHref", "", "Hyperlink for the title, e.g., 'mypost.html'")
+
 	if len(os.Args) < 2 {
 		fmt.Println("expected subcommand, e.g., 'gen-all-posts', 'gen-all-tags', etc")
 		os.Exit(1)
@@ -95,8 +98,15 @@ func main() {
 		}
 
 		err = genTag(*out, genTagCmd.Args())
-	case "tagify":
-		err = tagify()
+	case "postify":
+		postifyCmd.Parse(os.Args[2:])
+
+		if len(*titleHref) == 0 {
+			fmt.Fprintf(os.Stderr, "flag --titleHref must be given (non-empty)\n")
+			os.Exit(1)
+		}
+
+		err = postify(*titleHref)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command %q\n", command)
 		os.Exit(1)
