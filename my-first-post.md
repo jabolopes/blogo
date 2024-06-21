@@ -1,6 +1,6 @@
 My first post
 
-<div class="subtitle">January 02, 2024 &mdash; Jade Smith</div>
+Date: January 02, 2024 &mdash; Jade Smith
 
 My first post.
 

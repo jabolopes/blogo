@@ -45,8 +45,8 @@ func getPost(postFilename string) (Post, error) {
 			continue
 		}
 
-		if strings.HasPrefix(line, `<div class="subtitle">`) {
-			line = strings.TrimPrefix(line, `<div class="subtitle">`)
+		if strings.HasPrefix(line, `Date: `) {
+			line = strings.TrimPrefix(line, `Date: `)
 			line = strings.Split(line, ` &mdash;`)[0]
 			post.PostDate = line
 			continue

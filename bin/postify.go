@@ -22,6 +22,13 @@ func postify(titleHref string) error {
 			continue
 		}
 
+		if strings.HasPrefix(line, "Date: ") {
+			line = strings.TrimPrefix(line, "Date: ")
+			fmt.Printf(`<div class="postDate">%s</div>`, line)
+			fmt.Println()
+			continue
+		}
+
 		if strings.HasPrefix(line, "Tags: ") {
 			line = strings.TrimPrefix(line, "Tags: ")
 			tags := strings.Split(line, ",")

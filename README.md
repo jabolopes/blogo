@@ -15,14 +15,12 @@ dependencies, blogo provides a few different features that bashblog doesn't:
   which is the original source document, unlike in bashblog (Markdown or
   HTML?). Removing this ambiguity makes blog management easier.
 
-* Timestamps are stored inside the the Markdown post - this feature is important
-  to because I have many old posts that were written many months or years
-  ago. bashblog made it very difficult to manage old timestamps because it uses
-  a complex system of timestamps, where the timestamp can be managed by the
+* Post dates are stored inside the Markdown post itself - this feature is
+  important to me because I have many old posts that were written months or
+  years ago. bashblog made it very difficult to manage old post dates because it
+  uses a complex system of timestamps, where the timestamp can be managed by the
   filesystem or as a special marker in the generated HTML file. In the case of
-  blogo, the post date is stoed inside the post itself and there are still
-  things that can be improved, e.g., don't require the HTML markup around the
-  date.
+  blogo, the post date is stored inside the post itself.
 
 * Clear file organization - blogo organizes the files in clear subdirectories
   and the Markdown post files are clearly separated from the rest of files, in
@@ -85,9 +83,9 @@ See `my-first-post.md` for a template.
 ### How to set date in posts?
 
 1. Edit the Markdown file of a post.
-2. Add a line after the title with the format `<div
-   class="subtitle">Month Day, Year &mdash; Author Name</div>`, e.g.,
-   `<div class="subtitle">November 04, 2022 &mdash; Jose Lopes</div>`.
+2. Add a line after the title with the format `Date: Month Day, Year
+   &mdash; Author Name</div>`, e.g., `Date: November 04, 2022 &mdash;
+   Jose Lopes</div>`.
 3. Run `make rebuild`.
 
 See `my-first-post.md` for a template.
