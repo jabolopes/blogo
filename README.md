@@ -115,8 +115,8 @@ To link new CSS files to your blog's HTML pages edit the
 
 ### License
 
-The license (see `LICENSE`). covers the blog generation software included in
-this repository.
+The license (see `LICENSE`) covers the blog generation software included in this
+repository.
 
 The license does not cover any websites generated using this software. For
 example, if you use this software to generate your blog, the posts and the HTML
