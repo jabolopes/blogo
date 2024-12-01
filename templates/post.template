@@ -1,0 +1,7 @@
+### <a href="{{.PostURL}}">{{.PostTitle}}</a>
+
+<div class="postDate">{{.PostDate}}</div>
+
+{{.PostContent}}
+
+Tags: {{range $i, $tag := .Tags}}{{if $i}}, {{end}}<a href='tag_{{.}}.html'>{{.}}</a>{{end}}

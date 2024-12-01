@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"path"
 	"sort"
@@ -23,6 +25,12 @@ type Post struct {
 	Tags []string
 	// e.g., 'mypost.md'
 	MarkdownFilename string
+	// Post content without the title, date, tags, etc.
+	PostContent string
+	// Markdown content after it was rendered by the post template.
+	MarkdownContent string
+	// HTML content after it was rendered by the markdown program.
+	HTMLContent string
 }
 
 func getPost(postFilename string) (Post, error) {
@@ -35,6 +43,8 @@ func getPost(postFilename string) (Post, error) {
 	post := Post{
 		MarkdownFilename: postFilename,
 	}
+
+	var postContent strings.Builder
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -62,7 +72,12 @@ func getPost(postFilename string) (Post, error) {
 			post.Tags = splits
 			continue
 		}
+
+		postContent.WriteString(line)
+		postContent.WriteString("\n")
 	}
+
+	post.PostContent = postContent.String()
 
 	if err := scanner.Err(); err != nil {
 		return Post{}, err
@@ -130,9 +145,31 @@ func comparePostsDescending(p1, p2 Post) bool {
 	return p1.PostTitle <= p2.PostTitle
 }
 
+func postifiedFilename(filename string) string {
+	filename = path.Base(filename)
+	filename = strings.TrimSuffix(filename, path.Ext(filename))
+	filename = strings.TrimSuffix(filename, ".")
+	filename = filename + ".post"
+	return path.Join(outputPostsDirectory, filename)
+}
+
 // TODO: Avoid hardcoded "out" directory since it can be changed externally.
 func renderPost(filename string) ([]byte, error) {
-	filename = strings.ReplaceAll(filename, ".md", ".pre")
-	filename = path.Join("out", filename)
-	return os.ReadFile(filename)
+	file, err := os.Open(postifiedFilename(filename))
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	data, err := io.ReadAll(file)
+	if err != nil {
+		return nil, err
+	}
+
+	var post Post
+	if err := json.Unmarshal(data, &post); err != nil {
+		return nil, err
+	}
+
+	return []byte(post.HTMLContent), nil
 }

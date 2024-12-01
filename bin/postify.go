@@ -1,54 +1,63 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
+	"bytes"
+	"context"
+	"encoding/json"
 	"os"
-	"strings"
+	"text/template"
 )
 
-func postify(outputDirectory, titleHref string, postFilenames []string) error {
-	postTitle := ""
-
-	scanner := bufio.NewScanner(os.Stdin)
-
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		if len(postTitle) == 0 && len(line) > 0 {
-			postTitle = line
-			fmt.Printf(`### <a href="%s">%s</a>`, titleHref, line)
-			fmt.Println()
-			continue
-		}
-
-		if strings.HasPrefix(line, "Date: ") {
-			line = strings.TrimPrefix(line, "Date: ")
-			fmt.Printf(`<div class="postDate">%s</div>`, line)
-			fmt.Println()
-			continue
-		}
-
-		if strings.HasPrefix(line, "Tags: ") {
-			line = strings.TrimPrefix(line, "Tags: ")
-			tags := strings.Split(line, ",")
-
-			fmt.Printf(`Tags: `)
-			for i, tag := range tags {
-				tag = strings.TrimSpace(tag)
-
-				if i > 0 {
-					fmt.Printf(", ")
-				}
-				fmt.Printf(`<a href='tag_%s.html'>%s</a>`, tag, tag)
-			}
-			fmt.Println()
-
-			continue
-		}
-
-		fmt.Println(line)
+func postify(ctx context.Context, postFilename string) error {
+	post, err := getPost(postFilename)
+	if err != nil {
+		return err
 	}
 
-	return scanner.Err()
+	tmpl, err := template.ParseFiles(postTemplateName)
+	if err != nil {
+		return err
+	}
+
+	blogConfig["PostURL"] = post.PostURL
+	blogConfig["PostTitle"] = post.PostTitle
+	blogConfig["PostDate"] = post.PostDate
+	blogConfig["PostContent"] = post.PostContent
+	blogConfig["Tags"] = post.Tags
+
+	output := &bytes.Buffer{}
+
+	if err := tmpl.Execute(output, blogConfig); err != nil {
+		return err
+	}
+
+	post.MarkdownContent = output.String()
+
+	htmlContent := &bytes.Buffer{}
+	if err := markdown(ctx, output, htmlContent); err != nil {
+		return err
+	}
+
+	post.HTMLContent = htmlContent.String()
+
+	postJson, err := json.Marshal(post)
+	if err != nil {
+		return err
+	}
+
+	outputFile, err := os.OpenFile(postifiedFilename(postFilename), os.O_RDWR|os.O_CREATE, 0644)
+	if err != nil {
+		return err
+	}
+	defer outputFile.Close()
+
+	if _, err := outputFile.Write(postJson); err != nil {
+		return err
+	}
+
+	if err := outputFile.Close(); err != nil {
+		return err
+	}
+
+	return nil
 }

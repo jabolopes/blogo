@@ -31,7 +31,7 @@ func indexPostsByTag(filenames []string) (map[string][]Post, error) {
 	return index, nil
 }
 
-func genTag(outputDirectory string, postFilenames []string) error {
+func genTag(postFilenames []string) error {
 	tmpl, err := template.ParseFiles(templateName, contentTemplateName)
 	if err != nil {
 		return err
@@ -53,7 +53,7 @@ func genTag(outputDirectory string, postFilenames []string) error {
 			content = append(content, data...)
 		}
 
-		outputFilename := path.Join(outputDirectory, fmt.Sprintf("tag_%s.html", tagName))
+		outputFilename := path.Join(outputDistDirectory, fmt.Sprintf("tag_%s.html", tagName))
 		outputFile, err := os.Create(outputFilename)
 		if err != nil {
 			return err

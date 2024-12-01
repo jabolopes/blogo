@@ -50,7 +50,7 @@ blogo so it doens't have to be downloaded / installed.
    from GitHub.
 
 3. Add a post by creating a file with the extension `.md`, e.g., `mypost.md` in
-   the same directory as this file (`README.md`).
+   the `posts/` directory.
 
 4. Run `make` to generate your blog. All the blogs files (that you'd need to
    deploy to a Web server) are written to the `out/dist/` directory.
@@ -66,10 +66,10 @@ If you'd like to launch a Web server to test your blog, do the following
 
 ### How to create a post?
 
-1. Create a Markdown file (e.g., `my-post.md`) in the toplevel directory.
+1. Create a Markdown file (e.g., `my-post.md`) in the `posts/` directory.
 2. Run `make rebuild`.
 
-See `my-first-post.md` for a template.
+See `posts/my-first-post.md` for a template.
 
 ### How to set tags in posts?
 
@@ -78,7 +78,7 @@ See `my-first-post.md` for a template.
    tag2, etc`. For example, `Tags: story, scifi`.
 3. Run `make rebuild`.
 
-See `my-first-post.md` for a template.
+See `posts/my-first-post.md` for a template.
 
 ### How to set date in posts?
 
@@ -88,7 +88,7 @@ See `my-first-post.md` for a template.
    Jose Lopes</div>`.
 3. Run `make rebuild`.
 
-See `my-first-post.md` for a template.
+See `posts/my-first-post.md` for a template.
 
 ### How to delete a post?
 

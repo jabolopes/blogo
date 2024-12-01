@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
@@ -13,6 +14,9 @@ const (
 	allTagsTemplateName  = "templates/all_tags.template"
 	contentTemplateName  = "templates/content.template"
 	feedTemplateName     = "templates/feed.template"
+	postTemplateName     = "templates/post.template"
+
+	markdownProgram = "bin/Markdown.pl"
 
 	indexPostsNum = 10
 
@@ -25,6 +29,10 @@ const (
 
 	feedDateFormat = time.RFC1123Z
 	postDateFormat = "January 02, 2006"
+
+	outputDirectory      = "out"
+	outputDistDirectory  = "out/dist"
+	outputPostsDirectory = "out/posts"
 
 	authorEmail     = "jadesmith@email.com"
 	authorName      = "Jade Smith"
@@ -48,18 +56,15 @@ var blogConfig = map[string]interface{}{
 }
 
 func main() {
+	ctx := context.Background()
+
 	genAllPostsCmd := flag.NewFlagSet("gen-all-posts", flag.ExitOnError)
 	genAllTagsCmd := flag.NewFlagSet("gen-all-tags", flag.ExitOnError)
 	genFeedCmd := flag.NewFlagSet("gen-feed", flag.ExitOnError)
 	genIndexCmd := flag.NewFlagSet("gen-index", flag.ExitOnError)
 	genPostCmd := flag.NewFlagSet("gen-post", flag.ExitOnError)
-
 	genTagCmd := flag.NewFlagSet("gen-tag", flag.ExitOnError)
-	genTagOut := genTagCmd.String("out", "", "Output directory, e.g., 'out/'")
-
 	postifyCmd := flag.NewFlagSet("postify", flag.ExitOnError)
-	postifyOut := postifyCmd.String("out", "", "Output directory, e.g., 'out/'")
-	titleHref := postifyCmd.String("titleHref", "", "Hyperlink for the title, e.g., 'mypost.html'")
 
 	if len(os.Args) < 2 {
 		fmt.Println("expected subcommand, e.g., 'gen-all-posts', 'gen-all-tags', etc")
@@ -96,27 +101,17 @@ func main() {
 	case "gen-tag":
 		genTagCmd.Parse(os.Args[2:])
 
-		if len(*genTagOut) == 0 {
-			fmt.Fprintf(os.Stderr, "flag --out must be given (non-empty)\n")
-			os.Exit(1)
-		}
-
-		err = genTag(*genTagOut, genTagCmd.Args())
+		err = genTag(genTagCmd.Args())
 
 	case "postify":
 		postifyCmd.Parse(os.Args[2:])
 
-		if len(*postifyOut) == 0 {
-			fmt.Fprintf(os.Stderr, "flag --out must be given (non-empty)\n")
+		if len(postifyCmd.Args()) != 1 {
+			fmt.Fprintf(os.Stderr, "command %q expects 1 argument\n", command)
 			os.Exit(1)
 		}
 
-		if len(*titleHref) == 0 {
-			fmt.Fprintf(os.Stderr, "flag --titleHref must be given (non-empty)\n")
-			os.Exit(1)
-		}
-
-		err = postify(*postifyOut, *titleHref, postifyCmd.Args())
+		err = postify(ctx, postifyCmd.Args()[0])
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command %q\n", command)
 		os.Exit(1)
