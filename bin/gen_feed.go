@@ -44,7 +44,7 @@ func createFeedItems(filenames []string) ([]Item, error) {
 			content = strings.Join(lines, "\n")
 		}
 
-		postDate := post.ParsedDate.Format(dateFormat)
+		postDate := post.ParsedDate.Format(feedDateFormat)
 
 		item := Item{
 			post.PostTitle,
@@ -71,7 +71,7 @@ func genFeed(postFilenames []string) error {
 	}
 
 	blogConfig["IndexURL"] = fmt.Sprintf("%s/%s", blogURL, indexFilename)
-	blogConfig["PubDate"] = time.Now().Format(dateFormat)
+	blogConfig["PubDate"] = time.Now().Format(feedDateFormat)
 	blogConfig["FeedURL"] = fmt.Sprintf("%s/%s", blogURL, feedFilename)
 	blogConfig["Items"] = items
 	return tmpl.Execute(os.Stdout, blogConfig)

@@ -23,7 +23,8 @@ const (
 	allPostsTitleFormat = `%s &mdash; All posts`
 	allTagsTitleFormat  = `%s &mdash; All tags`
 
-	dateFormat = time.RFC1123Z
+	feedDateFormat = time.RFC1123Z
+	postDateFormat = "January 02, 2006"
 
 	authorEmail     = "jadesmith@email.com"
 	authorName      = "Jade Smith"

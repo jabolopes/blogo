@@ -79,7 +79,7 @@ func getPost(postFilename string) (Post, error) {
 
 	{
 		var err error
-		post.ParsedDate, err = time.Parse("January 02, 2006", post.PostDate)
+		post.ParsedDate, err = time.Parse(postDateFormat, post.PostDate)
 		if err != nil {
 			return Post{}, fmt.Errorf("failed to parse post date: %v", err)
 		}
