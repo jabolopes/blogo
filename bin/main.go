@@ -116,7 +116,7 @@ func main() {
 			os.Exit(1)
 		}
 
-		err = postify(*postifyOut, *titleHref)
+		err = postify(*postifyOut, *titleHref, postifyCmd.Args())
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command %q\n", command)
 		os.Exit(1)
