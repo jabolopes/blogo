@@ -55,9 +55,10 @@ func main() {
 	genPostCmd := flag.NewFlagSet("gen-post", flag.ExitOnError)
 
 	genTagCmd := flag.NewFlagSet("gen-tag", flag.ExitOnError)
-	out := genTagCmd.String("out", "", "Output directory, e.g., 'out/'")
+	genTagOut := genTagCmd.String("out", "", "Output directory, e.g., 'out/'")
 
 	postifyCmd := flag.NewFlagSet("postify", flag.ExitOnError)
+	postifyOut := postifyCmd.String("out", "", "Output directory, e.g., 'out/'")
 	titleHref := postifyCmd.String("titleHref", "", "Hyperlink for the title, e.g., 'mypost.html'")
 
 	if len(os.Args) < 2 {
@@ -80,6 +81,7 @@ func main() {
 	case "gen-index":
 		genIndexCmd.Parse(os.Args[2:])
 		err = genIndex(genIndexCmd.Args())
+
 	case "gen-post":
 		genPostCmd.Parse(os.Args[2:])
 
@@ -90,24 +92,31 @@ func main() {
 		}
 
 		err = genPost(args[0])
+
 	case "gen-tag":
 		genTagCmd.Parse(os.Args[2:])
 
-		if len(*out) == 0 {
+		if len(*genTagOut) == 0 {
 			fmt.Fprintf(os.Stderr, "flag --out must be given (non-empty)\n")
 			os.Exit(1)
 		}
 
-		err = genTag(*out, genTagCmd.Args())
+		err = genTag(*genTagOut, genTagCmd.Args())
+
 	case "postify":
 		postifyCmd.Parse(os.Args[2:])
+
+		if len(*postifyOut) == 0 {
+			fmt.Fprintf(os.Stderr, "flag --out must be given (non-empty)\n")
+			os.Exit(1)
+		}
 
 		if len(*titleHref) == 0 {
 			fmt.Fprintf(os.Stderr, "flag --titleHref must be given (non-empty)\n")
 			os.Exit(1)
 		}
 
-		err = postify(*titleHref)
+		err = postify(*postifyOut, *titleHref)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command %q\n", command)
 		os.Exit(1)

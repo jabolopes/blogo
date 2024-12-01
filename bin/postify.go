@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func postify(titleHref string) error {
+func postify(outputDirectory, titleHref string) error {
 	postTitle := ""
 
 	scanner := bufio.NewScanner(os.Stdin)

@@ -26,7 +26,7 @@ out/blogo: $(SRC_BLOGO) | out
 # blog contents
 
 out/%.pre: %.md out/blogo
-	( out/blogo postify --titleHref="$(basename $(notdir $@)).html" | $(md) ) < $< > $@
+	( out/blogo postify --out=out/ --titleHref="$(basename $(notdir $@)).html" | $(md) ) < $< > $@
 
 out/dist/%.html: %.md out/%.pre out/blogo | out/dist
 	out/blogo gen-post $< > $@
