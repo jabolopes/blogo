@@ -34,6 +34,9 @@ out/dist/%.html: %.md out/%.pre out/blogo | out/dist
 out/dist/%.css: css/%.css | out/dist
 	cp $^ $@
 
+out/dist/%: html/% | out/dist
+	cp $^ $@
+
 SRC_MDS := $(wildcard *.md)
 SRC_MDS := $(filter-out README.md, $(SRC_MDS))
 
@@ -42,6 +45,9 @@ OUT_HTMLS := $(patsubst %.md,out/dist/%.html,$(SRC_MDS))
 
 SRC_CSS := $(wildcard css/*.css)
 OUT_CSS := $(patsubst css/%,out/dist/%,$(SRC_CSS))
+
+SRC_HTML := $(wildcard html/*)
+OUT_HTML := $(patsubst html/%,out/dist/%,$(SRC_HTML))
 
 .PRECIOUS: $(SRC_PRES)
 
@@ -57,7 +63,7 @@ out/dist/all_tags.html: $(SRC_MDS) out/blogo $(OUT_CSS) | out/dist
 out/dist/feed.rss: $(SRC_MDS) out/blogo | out/dist
 	out/blogo gen-feed $(SRC_MDS) > $@
 
-generate: $(OUT_HTMLS) out/blogo out/dist/index.html out/dist/all_posts.html out/dist/all_tags.html out/dist/feed.rss $(OUT_CSS) | out/dist
+generate: $(OUT_HTMLS) out/blogo out/dist/index.html out/dist/all_posts.html out/dist/all_tags.html out/dist/feed.rss $(OUT_CSS) $(OUT_HTML) | out/dist
 	out/blogo gen-tag --out=out/dist/ $(SRC_MDS)
 
 print-%  : ; @echo $* = $($*)

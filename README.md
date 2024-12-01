@@ -113,6 +113,12 @@ to the `out/dist/` directory when running `make`.
 To link new CSS files to your blog's HTML pages edit the
 `templates/index.template` file and include CSS include tags.
 
+### How to add custom HTML pages?
+
+1. Create a directory named `html/`.
+2. Add any HTML pages to the `html/` directory.
+3. Run `make rebuild`.
+
 ### License
 
 The license (see `LICENSE`) covers the blog generation software included in this
