@@ -15,12 +15,7 @@ func loadIndexPosts() ([]byte, error) {
 
 	var content []byte
 	for _, post := range posts {
-		data, err := renderPost(post.MarkdownFilename)
-		if err != nil {
-			return nil, err
-		}
-
-		content = append(content, data...)
+		content = append(content, post.HTMLContent...)
 	}
 
 	return content, nil
