@@ -54,7 +54,7 @@ out/dist/index.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-index $(SRC_POSTS) > $@
 
 out/dist/all_posts.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
-	out/blogo gen-all-posts $(SRC_POSTS) > $@
+	out/blogo gen-all-posts > $@
 
 out/dist/all_tags.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-all-tags $(SRC_POSTS) > $@

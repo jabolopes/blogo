@@ -76,7 +76,7 @@ func main() {
 	switch command {
 	case "gen-all-posts":
 		genAllPostsCmd.Parse(os.Args[2:])
-		err = genAllPosts(genAllPostsCmd.Args())
+		err = genAllPosts()
 	case "gen-all-tags":
 		genAllTagsCmd.Parse(os.Args[2:])
 		err = genAllTags(genAllTagsCmd.Args())

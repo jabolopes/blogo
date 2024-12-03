@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"path"
+	"path/filepath"
 	"sort"
 	"strings"
 	"time"
@@ -31,6 +32,72 @@ type Post struct {
 	MarkdownContent string
 	// HTML content after it was rendered by the markdown program.
 	HTMLContent string
+}
+
+func postifiedFilename(filename string) string {
+	filename = path.Base(filename)
+	filename = strings.TrimSuffix(filename, path.Ext(filename))
+	filename = strings.TrimSuffix(filename, ".")
+	filename = filename + ".post"
+	return path.Join(outputPostsDirectory, filename)
+}
+
+func loadPost(filename string) (Post, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return Post{}, err
+	}
+	defer file.Close()
+
+	data, err := io.ReadAll(file)
+	if err != nil {
+		return Post{}, err
+	}
+
+	var post Post
+	if err := json.Unmarshal(data, &post); err != nil {
+		return Post{}, err
+	}
+
+	return post, nil
+}
+
+func loadAllPosts() ([]Post, error) {
+	filenames, err := filepath.Glob(fmt.Sprintf("%s/*.post", outputPostsDirectory))
+	if err != nil {
+		return nil, err
+	}
+
+	posts := make([]Post, 0, len(filenames))
+	for _, filename := range filenames {
+		post, err := loadPost(filename)
+		if err != nil {
+			return nil, err
+		}
+
+		posts = append(posts, post)
+	}
+
+	return posts, nil
+}
+
+func storePost(filename string, post Post) error {
+	postJson, err := json.Marshal(post)
+	if err != nil {
+		return err
+	}
+
+	outputFile, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer outputFile.Close()
+
+	if _, err := outputFile.Write(postJson); err != nil {
+		return err
+	}
+
+	return outputFile.Close()
 }
 
 func getPost(postFilename string) (Post, error) {
@@ -143,14 +210,6 @@ func comparePostsDescending(p1, p2 Post) bool {
 	}
 
 	return p1.PostTitle <= p2.PostTitle
-}
-
-func postifiedFilename(filename string) string {
-	filename = path.Base(filename)
-	filename = strings.TrimSuffix(filename, path.Ext(filename))
-	filename = strings.TrimSuffix(filename, ".")
-	filename = filename + ".post"
-	return path.Join(outputPostsDirectory, filename)
 }
 
 // TODO: Avoid hardcoded "out" directory since it can be changed externally.
