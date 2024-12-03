@@ -85,7 +85,7 @@ func main() {
 		err = genFeed(genFeedCmd.Args())
 	case "gen-index":
 		genIndexCmd.Parse(os.Args[2:])
-		err = genIndex(genIndexCmd.Args())
+		err = genIndex()
 
 	case "gen-post":
 		genPostCmd.Parse(os.Args[2:])

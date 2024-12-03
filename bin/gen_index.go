@@ -5,8 +5,8 @@ import (
 	"text/template"
 )
 
-func renderPostsForIndex(filenames []string) ([]byte, error) {
-	posts, err := getPostsSortedDescending(filenames)
+func loadIndexPosts() ([]byte, error) {
+	posts, err := loadAllPostsSortedDescending()
 	if err != nil {
 		return nil, err
 	}
@@ -26,13 +26,13 @@ func renderPostsForIndex(filenames []string) ([]byte, error) {
 	return content, nil
 }
 
-func genIndex(postFilenames []string) error {
+func genIndex() error {
 	tmpl, err := template.ParseFiles(pageTemplateName, contentTemplateName)
 	if err != nil {
 		return err
 	}
 
-	content, err := renderPostsForIndex(postFilenames)
+	content, err := loadIndexPosts()
 	if err != nil {
 		return err
 	}

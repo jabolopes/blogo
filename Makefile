@@ -51,7 +51,7 @@ OUT_POSTS := $(patsubst posts/%.md,out/dist/%.html,$(SRC_POSTS))
 .PRECIOUS: $(GEN_POSTS)
 
 out/dist/index.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
-	out/blogo gen-index $(SRC_POSTS) > $@
+	out/blogo gen-index > $@
 
 out/dist/all_posts.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-all-posts > $@

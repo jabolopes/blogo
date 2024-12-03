@@ -81,6 +81,19 @@ func loadAllPosts() ([]Post, error) {
 	return posts, nil
 }
 
+func loadAllPostsSortedDescending() ([]Post, error) {
+	posts, err := loadAllPosts()
+	if err != nil {
+		return nil, err
+	}
+
+	sort.Slice(posts, func(i, j int) bool {
+		return comparePostsDescending(posts[i], posts[j])
+	})
+
+	return posts, nil
+}
+
 func storePost(filename string, post Post) error {
 	postJson, err := json.Marshal(post)
 	if err != nil {
