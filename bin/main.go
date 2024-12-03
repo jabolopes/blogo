@@ -79,7 +79,7 @@ func main() {
 		err = genAllPosts()
 	case "gen-all-tags":
 		genAllTagsCmd.Parse(os.Args[2:])
-		err = genAllTags(genAllTagsCmd.Args())
+		err = genAllTags()
 	case "gen-feed":
 		genFeedCmd.Parse(os.Args[2:])
 		err = genFeed(genFeedCmd.Args())

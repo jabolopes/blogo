@@ -16,15 +16,15 @@ type Tag struct {
 	Count string
 }
 
-func indexTags(filenames []string) ([]Tag, error) {
+func loadAllTags() ([]Tag, error) {
 	counts := map[string]int{}
 
-	for _, filename := range filenames {
-		post, err := getPost(filename)
-		if err != nil {
-			return nil, err
-		}
+	posts, err := loadAllPosts()
+	if err != nil {
+		return nil, err
+	}
 
+	for _, post := range posts {
 		for _, tag := range post.Tags {
 			counts[tag] = counts[tag] + 1
 		}
@@ -56,13 +56,13 @@ func indexTags(filenames []string) ([]Tag, error) {
 	return tags, nil
 }
 
-func genAllTags(postFilenames []string) error {
+func genAllTags() error {
 	tmpl, err := template.ParseFiles(pageTemplateName, allTagsTemplateName)
 	if err != nil {
 		return err
 	}
 
-	tags, err := indexTags(postFilenames)
+	tags, err := loadAllTags()
 	if err != nil {
 		return err
 	}

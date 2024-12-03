@@ -57,7 +57,7 @@ out/dist/all_posts.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-all-posts > $@
 
 out/dist/all_tags.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
-	out/blogo gen-all-tags $(SRC_POSTS) > $@
+	out/blogo gen-all-tags > $@
 
 out/dist/feed.rss: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-feed $(SRC_POSTS) > $@
