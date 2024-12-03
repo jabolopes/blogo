@@ -5,8 +5,8 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="theme-color" content="#00cc00">
-  <link rel="stylesheet" href="solarized-dark.min.css">
-  <link rel="stylesheet" href="blog.css">
+  <link rel="stylesheet" href="css/solarized-dark.min.css">
+  <link rel="stylesheet" href="css/blog.css">
   <link rel="alternate" type="application/rss+xml" title="subscribe to this page..." href="feed.rss" />
   <title>{{.Title}}</title>
 </head>

@@ -28,16 +28,10 @@ out/blogo: $(SRC_BLOGO) | out
 
 # assets
 
-out/dist/%.css: css/%.css | out/dist
-	cp $^ $@
-
 out/dist/%: html/% | out/dist
-	cp $^ $@
+	cp -T -r $^ $@
 
-SRC_CSS := $(wildcard css/*.css)
-OUT_CSS := $(patsubst css/%,out/dist/%,$(SRC_CSS))
-
-SRC_HTML := $(wildcard html/*)
+SRC_HTML := $(wildcard html/**)
 OUT_HTML := $(patsubst html/%,out/dist/%,$(SRC_HTML))
 
 # blog contents
@@ -68,7 +62,7 @@ out/dist/all_tags.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 out/dist/feed.rss: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-feed $(SRC_POSTS) > $@
 
-generate: $(OUT_POSTS) out/blogo out/dist/index.html out/dist/all_posts.html out/dist/all_tags.html out/dist/feed.rss $(OUT_CSS) $(OUT_HTML) | out/dist
+generate: $(OUT_POSTS) out/blogo out/dist/index.html out/dist/all_posts.html out/dist/all_tags.html out/dist/feed.rss $(OUT_HTML) | out/dist
 	out/blogo gen-tag $(SRC_POSTS)
 
 print-%  : ; @echo $* = $($*)
