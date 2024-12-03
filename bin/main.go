@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	templateName         = "templates/index.template"
+	pageTemplateName     = "templates/page.template"
 	allPostsTemplateName = "templates/all_posts.template"
 	allTagsTemplateName  = "templates/all_tags.template"
 	contentTemplateName  = "templates/content.template"

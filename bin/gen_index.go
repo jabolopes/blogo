@@ -27,7 +27,7 @@ func renderPostsForIndex(filenames []string) ([]byte, error) {
 }
 
 func genIndex(postFilenames []string) error {
-	tmpl, err := template.ParseFiles(templateName, contentTemplateName)
+	tmpl, err := template.ParseFiles(pageTemplateName, contentTemplateName)
 	if err != nil {
 		return err
 	}

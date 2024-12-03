@@ -57,7 +57,7 @@ func indexTags(filenames []string) ([]Tag, error) {
 }
 
 func genAllTags(postFilenames []string) error {
-	tmpl, err := template.ParseFiles(templateName, allTagsTemplateName)
+	tmpl, err := template.ParseFiles(pageTemplateName, allTagsTemplateName)
 	if err != nil {
 		return err
 	}

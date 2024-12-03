@@ -63,7 +63,7 @@ func groupByMonth(posts []Post) ([]Month, error) {
 }
 
 func genAllPosts(postFilenames []string) error {
-	tmpl, err := template.ParseFiles(templateName, allPostsTemplateName)
+	tmpl, err := template.ParseFiles(pageTemplateName, allPostsTemplateName)
 	if err != nil {
 		return err
 	}
