@@ -84,7 +84,7 @@ func main() {
 		err = genAllTags()
 	case "gen-feed":
 		genFeedCmd.Parse(os.Args[2:])
-		err = genFeed(genFeedCmd.Args())
+		err = genFeed()
 	case "gen-index":
 		genIndexCmd.Parse(os.Args[2:])
 		err = genIndex()
@@ -113,6 +113,7 @@ func main() {
 		}
 
 		err = postify(ctx, postifyCmd.Args()[0])
+
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command %q\n", command)
 		os.Exit(1)

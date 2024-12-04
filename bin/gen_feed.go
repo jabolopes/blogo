@@ -15,8 +15,8 @@ type Item struct {
 	PostDate    string
 }
 
-func createFeedItems(filenames []string) ([]Item, error) {
-	posts, err := getPostsSortedDescending(filenames)
+func createFeedItems() ([]Item, error) {
+	posts, err := loadAllPostsSortedDescending()
 	if err != nil {
 		return nil, err
 	}
@@ -59,13 +59,13 @@ func createFeedItems(filenames []string) ([]Item, error) {
 	return items, nil
 }
 
-func genFeed(postFilenames []string) error {
+func genFeed() error {
 	tmpl, err := template.ParseFiles(feedTemplateName)
 	if err != nil {
 		return err
 	}
 
-	items, err := createFeedItems(postFilenames)
+	items, err := createFeedItems()
 	if err != nil {
 		return err
 	}

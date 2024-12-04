@@ -185,33 +185,6 @@ func getPost(postFilename string) (Post, error) {
 	return post, nil
 }
 
-func getPosts(filenames []string) ([]Post, error) {
-	var posts []Post
-	for _, filename := range filenames {
-		post, err := getPost(filename)
-		if err != nil {
-			return nil, err
-		}
-
-		posts = append(posts, post)
-	}
-
-	return posts, nil
-}
-
-func getPostsSortedDescending(filenames []string) ([]Post, error) {
-	posts, err := getPosts(filenames)
-	if err != nil {
-		return nil, err
-	}
-
-	sort.Slice(posts, func(i, j int) bool {
-		return comparePostsDescending(posts[i], posts[j])
-	})
-
-	return posts, nil
-}
-
 func comparePostsDescending(p1, p2 Post) bool {
 	// Sort in descending order (newest to oldest).
 	if p2.ParsedDate.Before(p1.ParsedDate) {
