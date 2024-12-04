@@ -32,7 +32,7 @@ func loadPostsByTag() (map[string][]Post, error) {
 }
 
 func genTag() error {
-	tmpl, err := template.ParseFiles(pageTemplateName, contentTemplateName)
+	tmpl, err := template.ParseFiles(pageTemplateName, tagTemplateName)
 	if err != nil {
 		return err
 	}
@@ -43,16 +43,6 @@ func genTag() error {
 	}
 
 	for tagName, posts := range index {
-		var content []byte
-		for _, post := range posts {
-			data, err := renderPost(post.MarkdownFilename)
-			if err != nil {
-				return err
-			}
-
-			content = append(content, data...)
-		}
-
 		outputFilename := path.Join(outputDistDirectory, fmt.Sprintf("tag_%s.html", tagName))
 		outputFile, err := os.Create(outputFilename)
 		if err != nil {
@@ -65,7 +55,7 @@ func genTag() error {
 			config[key] = value
 		}
 		config["Title"] = fmt.Sprintf(genTagTitleFormat, blogName, tagName)
-		config["Content"] = string(content)
+		config["Posts"] = posts
 
 		if err := tmpl.Execute(outputFile, config); err != nil {
 			return err

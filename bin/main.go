@@ -12,11 +12,11 @@ const (
 	pageTemplateName     = "templates/page.template"
 	allPostsTemplateName = "templates/all_posts.template"
 	allTagsTemplateName  = "templates/all_tags.template"
-	contentTemplateName  = "templates/content.template"
 	feedTemplateName     = "templates/feed.template"
 	indexTemplateName    = "templates/index.template"
 	markdownTemplateName = "templates/markdown.template"
 	postTemplateName     = "templates/post.template"
+	tagTemplateName      = "templates/tag.template"
 
 	markdownProgram = "bin/Markdown.pl"
 
