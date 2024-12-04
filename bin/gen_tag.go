@@ -8,15 +8,15 @@ import (
 	"text/template"
 )
 
-func indexPostsByTag(filenames []string) (map[string][]Post, error) {
+func loadPostsByTag() (map[string][]Post, error) {
 	index := map[string][]Post{}
 
-	for _, filename := range filenames {
-		post, err := getPost(filename)
-		if err != nil {
-			return nil, err
-		}
+	posts, err := loadAllPosts()
+	if err != nil {
+		return nil, err
+	}
 
+	for _, post := range posts {
 		for _, tag := range post.Tags {
 			index[tag] = append(index[tag], post)
 		}
@@ -31,13 +31,13 @@ func indexPostsByTag(filenames []string) (map[string][]Post, error) {
 	return index, nil
 }
 
-func genTag(postFilenames []string) error {
+func genTag() error {
 	tmpl, err := template.ParseFiles(pageTemplateName, contentTemplateName)
 	if err != nil {
 		return err
 	}
 
-	index, err := indexPostsByTag(postFilenames)
+	index, err := loadPostsByTag()
 	if err != nil {
 		return err
 	}

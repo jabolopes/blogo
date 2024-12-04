@@ -63,6 +63,6 @@ out/dist/feed.rss: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-feed $(SRC_POSTS) > $@
 
 generate: $(OUT_POSTS) out/blogo out/dist/index.html out/dist/all_posts.html out/dist/all_tags.html out/dist/feed.rss $(OUT_HTML) | out/dist
-	out/blogo gen-tag $(SRC_POSTS)
+	out/blogo gen-tag
 
 print-%  : ; @echo $* = $($*)

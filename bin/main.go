@@ -102,8 +102,7 @@ func main() {
 
 	case "gen-tag":
 		genTagCmd.Parse(os.Args[2:])
-
-		err = genTag(genTagCmd.Args())
+		err = genTag()
 
 	case "postify":
 		postifyCmd.Parse(os.Args[2:])
