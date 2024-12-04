@@ -1,0 +1,5 @@
+{{define "content"}}
+{{range .Posts}}
+  {{.HTMLContent}}
+{{end}}
+{{end}}

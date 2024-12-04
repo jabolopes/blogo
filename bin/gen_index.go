@@ -5,33 +5,27 @@ import (
 	"text/template"
 )
 
-func loadIndexPosts() ([]byte, error) {
+func loadIndexPosts() ([]Post, error) {
 	posts, err := loadAllPostsSortedDescending()
 	if err != nil {
 		return nil, err
 	}
 
 	posts = posts[:min(len(posts), indexPostsNum)]
-
-	var content []byte
-	for _, post := range posts {
-		content = append(content, post.HTMLContent...)
-	}
-
-	return content, nil
+	return posts, nil
 }
 
 func genIndex() error {
-	tmpl, err := template.ParseFiles(pageTemplateName, contentTemplateName)
+	tmpl, err := template.ParseFiles(pageTemplateName, indexTemplateName)
 	if err != nil {
 		return err
 	}
 
-	content, err := loadIndexPosts()
+	posts, err := loadIndexPosts()
 	if err != nil {
 		return err
 	}
 
-	blogConfig["Content"] = string(content)
+	blogConfig["Posts"] = posts
 	return tmpl.Execute(os.Stdout, blogConfig)
 }
