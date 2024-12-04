@@ -14,7 +14,7 @@ func postify(ctx context.Context, postFilename string) error {
 		return err
 	}
 
-	tmpl, err := template.ParseFiles(postTemplateName)
+	tmpl, err := template.ParseFiles(markdownTemplateName)
 	if err != nil {
 		return err
 	}
