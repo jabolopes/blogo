@@ -8,8 +8,6 @@ clean:
 
 rebuild: clean generate
 
-md=bin/Markdown.pl
-
 out:
 	mkdir -p $@
 

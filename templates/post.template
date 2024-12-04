@@ -1,3 +1,9 @@
 {{define "content"}}
+<h3><a href="{{.Post.PostURL}}">{{.Post.PostTitle}}</a></h3>
+
+<div class="postDate">{{.Post.PostDate}}</div>
+
 {{.Post.HTMLContent}}
+
+<p>Tags: {{range $i, $tag := .Post.Tags}}{{if $i}}, {{end}}<a href='tag_{{.}}.html'>{{.}}</a>{{end}}</p>
 {{end}}

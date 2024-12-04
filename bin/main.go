@@ -14,7 +14,6 @@ const (
 	allTagsTemplateName  = "templates/all_tags.template"
 	feedTemplateName     = "templates/feed.template"
 	indexTemplateName    = "templates/index.template"
-	markdownTemplateName = "templates/markdown.template"
 	postTemplateName     = "templates/post.template"
 	tagTemplateName      = "templates/tag.template"
 

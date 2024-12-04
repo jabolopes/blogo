@@ -1,5 +1,11 @@
 {{define "content"}}
 {{range .Posts}}
-  {{.HTMLContent}}
+<h3><a href="{{.PostURL}}">{{.PostTitle}}</a></h3>
+
+<div class="postDate">{{.PostDate}}</div>
+
+{{.HTMLContent}}
+
+<p>Tags: {{range $i, $tag := .Tags}}{{if $i}}, {{end}}<a href='tag_{{.}}.html'>{{.}}</a>{{end}}</p>
 {{end}}
 {{end}}
