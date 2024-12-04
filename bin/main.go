@@ -16,6 +16,7 @@ const (
 	feedTemplateName     = "templates/feed.template"
 	indexTemplateName    = "templates/index.template"
 	markdownTemplateName = "templates/markdown.template"
+	postTemplateName     = "templates/post.template"
 
 	markdownProgram = "bin/Markdown.pl"
 

@@ -6,16 +6,16 @@ import (
 )
 
 func genPost(postFilename string) error {
-	tmpl, err := template.ParseFiles(pageTemplateName, contentTemplateName)
+	tmpl, err := template.ParseFiles(pageTemplateName, postTemplateName)
 	if err != nil {
 		return err
 	}
 
-	content, err := renderPost(postFilename)
+	post, err := loadPost(postifiedFilename(postFilename))
 	if err != nil {
 		return err
 	}
 
-	blogConfig["Content"] = string(content)
+	blogConfig["Post"] = post
 	return tmpl.Execute(os.Stdout, blogConfig)
 }
