@@ -197,24 +197,3 @@ func comparePostsDescending(p1, p2 Post) bool {
 
 	return p1.PostTitle <= p2.PostTitle
 }
-
-// TODO: Avoid hardcoded "out" directory since it can be changed externally.
-func renderPost(filename string) ([]byte, error) {
-	file, err := os.Open(postifiedFilename(filename))
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	data, err := io.ReadAll(file)
-	if err != nil {
-		return nil, err
-	}
-
-	var post Post
-	if err := json.Unmarshal(data, &post); err != nil {
-		return nil, err
-	}
-
-	return []byte(post.HTMLContent), nil
-}

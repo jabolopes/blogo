@@ -27,12 +27,7 @@ func createFeedItems() ([]Item, error) {
 	for _, post := range posts {
 		postUrl := fmt.Sprintf("%s/%s.html", blogURL, strings.TrimSuffix(post.MarkdownFilename, ".md"))
 
-		data, err := renderPost(post.MarkdownFilename)
-		if err != nil {
-			return nil, err
-		}
-
-		content := string(data)
+		content := post.HTMLContent
 		{
 			lines := strings.Split(content, "\n")
 			for i := 0; len(lines) > 0 && i < 2; {
