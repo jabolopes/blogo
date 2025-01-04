@@ -1,10 +1,17 @@
-{{define "content"}}<h3>All posts</h3>
-
+{{define "content"}}
 {{range .Months}}
 <h4 class='allposts_header'>{{.Date}}</h4>
-<ul>
-  {{range .Posts}}<li><a href="{{.PostURL}}">{{.PostTitle}}</a> &mdash; {{.PostDate}}</li>
+<table>
+  {{range .Posts}}
+<div class="item mb-3">
+	<div class="media">
+        	<div class="media-body">
+			<h3 class="title mb-1"><a href="{{.PostURL}}">{{.PostTitle}}</a></h3>
+			<div class="meta mb-1"><span>{{.PostDate}}</span></div>
+		</div>
+	</div>
+</div>
   {{end}}
-</ul>
+</table>
 {{end}}
 {{end}}

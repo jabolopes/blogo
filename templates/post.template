@@ -1,9 +1,15 @@
 {{define "content"}}
-<h3><a href="{{.Post.PostURL}}">{{.Post.PostTitle}}</a></h3>
+<div class="item mb-3">
+ <div class="media">
+  <div class="media-body">
+	  <h3 class="title mb-1"><a href="{{.Post.PostURL}}">{{.Post.PostTitle}}</a></h3>
+	  <div class="meta mb-1"><span>{{.Post.PostDate}}</span></div>
+  </div>
+ </div>
+</div>
+<div class="post">
+  {{.Post.HTMLContent}}
 
-<div class="postDate">{{.Post.PostDate}}</div>
-
-{{.Post.HTMLContent}}
-
-<p>Tags: {{range $i, $tag := .Post.Tags}}{{if $i}}, {{end}}<a href='tag_{{.}}.html'>{{.}}</a>{{end}}</p>
+  <p>Tags: {{range $i, $tag := .Post.Tags}}{{if $i}}, {{end}}<a href='tag_{{.}}.html'>{{.}}</a>{{end}}</p>
+</div>
 {{end}}

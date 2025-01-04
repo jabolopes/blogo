@@ -4,36 +4,42 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="theme-color" content="#00cc00">
-  <link rel="stylesheet" href="css/solarized-dark.min.css">
+  <link rel="stylesheet" href="css/theme-1.css">
   <link rel="stylesheet" href="css/blog.css">
   <link rel="alternate" type="application/rss+xml" title="subscribe to this page..." href="feed.rss" />
   <title>{{.Title}}</title>
 </head>
 <body>
-  <div id="divbodyholder">
-    <div class="headerholder">
-      <div class="header">
-        <div id="title">
-          <h1><a href="/index.html">{{.BlogName}}</a></h1>
-          <div id="description">{{.BlogDescription}}</div>
+  <div class="main-wrapper">
+    <section class="cta-section theme-bg-light py-5">
+      <div class="container">
+        <div class="media">
+          <div class="media-body">
+            <h2 class="heading mt-4"><a href="/index.html">{{.BlogName}}</a></h2>
+            <div class="intro">{{.BlogDescription}}</div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div id="divbody">
-      <div class="content">
+    <section class="blog-list px-3 py-5 p-md-5">
+      <div class="container">
         {{template "content" .}}
 
-        <div id="all_posts">
+	<div id="all_posts">
           <a href="all_posts.html">More posts</a> &mdash; <a href="all_tags.html">All tags</a> &mdash; <a href="feed.rss">Subscribe</a>
         </div>
       </div>
+    </section>
 
-      <div id="footer">{{.License}} <a href="{{.AuthorURL}}">{{.AuthorName}}</a> &mdash; <a href="mailto:{{.AuthorEmail}}">{{.AuthorEmail}}</a>
-        <br/>Generated with <a href="https://github.com/jabolopes/blogo">blogo</a>, a simple go program to easily create blogs like this one
-      </div>
-    </div>
+    <footer class="footer text-center py-2 theme-bg-dark">
+      <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
+      <small class="copyright">{{.License}} <a href="{{.AuthorURL}}">{{.AuthorName}}</a> &mdash; <a href="mailto:{{.AuthorEmail}}">{{.AuthorEmail}}</a></small>
+      <br>
+      <small class="copyright">Generated with <a href="https://github.com/jabolopes/blogo">blogo</a>, a simple go program to easily create blogs like this one</small>
+      <br>
+      <small class="copyright"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/popular/devblog-free-bootstrap-4-blog-template-for-developers">Theme</a> by <a href="https://twitter.com/3rdwave_themes">Xiaoying Riley</a> under the <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></small>
+    </footer>
   </div>
 </body>
 </html>
