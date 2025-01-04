@@ -49,8 +49,7 @@ blogo so it doens't have to be downloaded / installed.
 2. Download blogo either by cloning this repository or by downloading the files
    from GitHub.
 
-3. Add a post by creating a file with the extension `.md`, e.g., `mypost.md` in
-   the `posts/` directory.
+3. Add post to the `posts/` directory. See existing examples in that directory.
 
 4. Run `make` to generate your blog. All the blogs files (that you'd need to
    deploy to a Web server) are written to the `out/dist/` directory.
@@ -60,64 +59,57 @@ That's all!
 If you'd like to launch a Web server to test your blog, do the following
 (requires Python3 installed):
 
-4. Run `make run` and in your browser visit `http://localhost:8000`.
+5. Run `make run` and in your browser visit `http://localhost:8000`.
 
 ## Documentation
 
 ### How to create a post?
 
-1. Create a Markdown file (e.g., `my-post.md`) in the `posts/` directory.
+1. Create a Markdown file, e.g., `posts/my-post.md`.
 2. Run `make rebuild`.
 
-See `posts/my-first-post.md` for a template.
+See the `posts/` directory for examples.
 
 ### How to set tags in posts?
 
-1. Edit the Markdown file of a post.
-2. Add a line at the end of the post with the format `Tags: tag1,
-   tag2, etc`. For example, `Tags: story, scifi`.
-3. Run `make rebuild`.
+Tags are set directly in the post via the `Tags:` field.
 
-See `posts/my-first-post.md` for a template.
+See the `posts/` directory for examples.
 
-### How to set date in posts?
+### How to set the date in posts?
 
-1. Edit the Markdown file of a post.
-2. Add a line after the title with the format `Date: Month Day, Year
-   &mdash; Author Name</div>`, e.g., `Date: November 04, 2022 &mdash;
-   Jose Lopes</div>`.
-3. Run `make rebuild`.
+Dates are set directly in the post via the `Date:` field.
 
-See `posts/my-first-post.md` for a template.
+See the `posts/` directory for examples.
 
 ### How to delete a post?
 
-1. Delete the corresponding Markdown file.
+1. Delete the file from the `posts/` directory.
 2. Run `make rebuild`.
 
 ### How to change the blog's configuration, e.g., blog name, etc?
 
-1. Edit the file `bin/main.go`. It contains constants, such as,
-   `blogName`, `blogDescription`, `authorName`, among others. These
-   parameters can be changed.
-2. Run `make rebuild`.
+1. Edit the file `bin/main.go`.
+2. Change the `blogName`, `blogDescription`, `authorName`, etc.
+3. Run `make rebuild`.
 
 ### How to change the blog's appearance?
 
-Edit the CSS files (see `css/` directory) and the HTML templates (see
-`templates/` directory), and run `make rebuild`.
+1. Edit the CSS files (see the `html/css/` directory)
+2. Edit the HTML templates (see `templates/` directory)
+3. Run `make rebuild`.
 
-Any CSS files stored in the `css/` directory are automatically copied
+Any CSS files stored in the `html/css/` directory are automatically copied
 to the `out/dist/` directory when running `make`.
 
 To link new CSS files to your blog's HTML pages edit the
 `templates/index.template` file and include CSS include tags.
 
-### How to add custom HTML pages?
+### How to add custom HTML pages or custom files?
 
-1. Create a directory named `html/`.
-2. Add any HTML pages to the `html/` directory.
-3. Run `make rebuild`.
+Any files in the `html/` directory are copied directly to the output.
+
+Add any files or directories to the `html/` directory to have them automatically copied to the output when running `make`.
 
 ### License
 
