@@ -4,28 +4,21 @@ import (
 	"fmt"
 	"os"
 	"path"
-	"sort"
 	"text/template"
 )
 
 func loadPostsByTag() (map[string][]Post, error) {
 	index := map[string][]Post{}
 
-	posts, err := loadAllPosts()
+	posts, err := loadAllPostsSortedDescending()
 	if err != nil {
 		return nil, err
 	}
 
 	for _, post := range posts {
 		for _, tag := range post.Tags {
-			index[tag] = append(index[tag], post)
+			index[tag.Name] = append(index[tag.Name], post)
 		}
-	}
-
-	for _, posts := range index {
-		sort.Slice(posts, func(i, j int) bool {
-			return comparePostsDescending(posts[i], posts[j])
-		})
 	}
 
 	return index, nil
@@ -43,7 +36,7 @@ func genTag() error {
 	}
 
 	for tagName, posts := range index {
-		outputFilename := path.Join(outputDistDirectory, fmt.Sprintf("tag_%s.html", tagName))
+		outputFilename := path.Join(outputDistDirectory, Tag{tagName}.Href())
 		outputFile, err := os.Create(outputFilename)
 		if err != nil {
 			return err

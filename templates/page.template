@@ -13,7 +13,8 @@
   <div class="main-wrapper">
     <section class="cta-section theme-bg-light py-5">
       <div class="container">
-        <div class="media">
+        <div class="media ml-5">
+          <img class="mr-4 blogImage" src="{{.BlogImage}}">
           <div class="media-body">
             <h2 class="heading mt-4"><a href="/index.html">{{.BlogName}}</a></h2>
             <div class="intro">{{.BlogDescription}}</div>
@@ -26,7 +27,7 @@
       <div class="container">
         {{template "content" .}}
 
-	<div id="all_posts">
+        <div id="all_posts">
           <a href="all_posts.html">More posts</a> &mdash; <a href="all_tags.html">All tags</a> &mdash; <a href="feed.rss">Subscribe</a>
         </div>
       </div>
@@ -39,6 +40,8 @@
       <small class="copyright">Generated with <a href="https://github.com/jabolopes/blogo">blogo</a>, a simple go program to easily create blogs like this one</small>
       <br>
       <small class="copyright"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/popular/devblog-free-bootstrap-4-blog-template-for-developers">Theme</a> by <a href="https://twitter.com/3rdwave_themes">Xiaoying Riley</a> under the <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></small>
+      <br>
+      <small class="copyright">Logo by <a href="https://www.vecteezy.com/free-vector/blog">Vecteezy</a></small>
     </footer>
   </div>
 </body>

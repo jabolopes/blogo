@@ -1,3 +1,26 @@
+.blogImage {
+  height: 90px;
+  padding-top: 1rem;
+  object-fit: cover;
+}
+
+.blog-list .item .title {
+  margin-top: 1rem;
+}
+
+.allposts_header {
+  color: #8f8f8f;
+}
+
+.allposts_date {
+  color: #8f8f8f;
+  float: right;
+}
+
+ul.alltags {
+  list-style-type: none;
+}
+
 footer a {
   color: #FFBF00;
 }

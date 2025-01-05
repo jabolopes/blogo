@@ -1,22 +1,21 @@
 package main
 
 import (
+	"cmp"
 	"fmt"
 	"os"
-	"sort"
+	"slices"
 	"text/template"
 )
 
-type Tag struct {
-	// e.g., 'tag_poetry.html'.
-	Href string
+type TagCount struct {
 	// e.g., 'poetry'.
-	Name string
+	Tag Tag
 	// e.g., '1 post' or '2 posts'.
 	Count string
 }
 
-func loadAllTags() ([]Tag, error) {
+func loadAllTags() ([]TagCount, error) {
 	counts := map[string]int{}
 
 	posts, err := loadAllPosts()
@@ -26,11 +25,11 @@ func loadAllTags() ([]Tag, error) {
 
 	for _, post := range posts {
 		for _, tag := range post.Tags {
-			counts[tag] = counts[tag] + 1
+			counts[tag.Name] = counts[tag.Name] + 1
 		}
 	}
 
-	var tags []Tag
+	var tags []TagCount
 	for name, count := range counts {
 		var countStr string
 		if count == 1 {
@@ -39,18 +38,15 @@ func loadAllTags() ([]Tag, error) {
 			countStr = fmt.Sprintf("%d posts", count)
 		}
 
-		tag := Tag{
-			fmt.Sprintf("tag_%s.html", name),
-			name,
+		tag := TagCount{
+			Tag{name},
 			countStr,
 		}
 		tags = append(tags, tag)
 	}
 
-	sort.Slice(tags, func(i, j int) bool {
-		t1 := tags[i]
-		t2 := tags[j]
-		return t1.Name <= t2.Name
+	slices.SortFunc(tags, func(t1, t2 TagCount) int {
+		return cmp.Compare(t1.Tag.Name, t2.Tag.Name)
 	})
 
 	return tags, nil

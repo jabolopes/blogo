@@ -17,8 +17,6 @@ const (
 	postTemplateName     = "templates/post.template"
 	tagTemplateName      = "templates/tag.template"
 
-	markdownProgram = "bin/Markdown.pl"
-
 	indexPostsNum = 10
 
 	indexFilename = "index.html"
@@ -29,7 +27,12 @@ const (
 	allTagsTitleFormat  = `%s &mdash; All tags`
 
 	feedDateFormat = time.RFC1123Z
-	postDateFormat = "January 02, 2006"
+	// Date format that the author uses in the Markdown posts.
+	postParseDateFormat = "2006/01/02"
+	// Date format that the final rendered blog uses.
+	postDisplayDateFormat = "January 02, 2006"
+	// Date format that the final rendered blog uses.
+	monthDisplayDateFormat = "January 2006"
 
 	outputDirectory      = "out"
 	outputDistDirectory  = "out/dist"
@@ -39,6 +42,7 @@ const (
 	authorName      = "Jade Smith"
 	authorURL       = "https://github.com/jadesmith"
 	blogDescription = "Jade Smith's cool blogo"
+	blogImage       = "images/logo.png"
 	blogLanguage    = "en"
 	blogName        = "Cool Blogo"
 	blogURL         = "http://jadesmith.blogo"
@@ -46,14 +50,17 @@ const (
 )
 
 var blogConfig = map[string]interface{}{
-	"Title":           blogName,
-	"BlogDescription": blogDescription,
-	"BlogLanguage":    blogLanguage,
-	"BlogName":        blogName,
-	"License":         license,
-	"AuthorURL":       authorURL,
-	"AuthorName":      authorName,
-	"AuthorEmail":     authorEmail,
+	"Title":                  blogName,
+	"BlogDescription":        blogDescription,
+	"BlogImage":              blogImage,
+	"BlogLanguage":           blogLanguage,
+	"BlogName":               blogName,
+	"License":                license,
+	"AuthorURL":              authorURL,
+	"AuthorName":             authorName,
+	"AuthorEmail":            authorEmail,
+	"PostDisplayDateFormat":  postDisplayDateFormat,
+	"MonthDisplayDateFormat": monthDisplayDateFormat,
 }
 
 func main() {

@@ -1,16 +1,22 @@
 {{define "content"}}
+<h4 class='allposts_header mb-4'>All posts</h4>
 {{range .Months}}
-<h4 class='allposts_header'>{{.Date}}</h4>
+<hr>
+<h4 class='allposts_date'>{{.Date.Format $.MonthDisplayDateFormat}}</h4>
 <table>
   {{range .Posts}}
-<div class="item mb-3">
-	<div class="media">
-        	<div class="media-body">
-			<h3 class="title mb-1"><a href="{{.PostURL}}">{{.PostTitle}}</a></h3>
-			<div class="meta mb-1"><span>{{.PostDate}}</span></div>
-		</div>
-	</div>
-</div>
+  <div class="item mb-2">
+    <div class="media">
+      <div class="media-body">
+        <h3 class="title mb-1 mt-0">
+          <a href="{{.PostURL}}">{{.PostTitle}}</a>
+        </h3>
+        <div class="meta mb-1">
+          <span>{{.Date.Format $.PostDisplayDateFormat}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
   {{end}}
 </table>
 {{end}}

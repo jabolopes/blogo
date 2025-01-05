@@ -2,14 +2,18 @@
 <div class="item mb-3">
  <div class="media">
   <div class="media-body">
-	  <h3 class="title mb-1"><a href="{{.Post.PostURL}}">{{.Post.PostTitle}}</a></h3>
-	  <div class="meta mb-1"><span>{{.Post.PostDate}}</span></div>
+    <h3 class="title mb-1">
+      <a href="{{.Post.PostURL}}">{{.Post.PostTitle}}</a>
+    </h3>
+    <div class="meta mb-1">
+      <span>{{.Post.Date.Format .PostDisplayDateFormat}}</span>
+    </div>
   </div>
  </div>
 </div>
 <div class="post">
   {{.Post.HTMLContent}}
 
-  <p>Tags: {{range $i, $tag := .Post.Tags}}{{if $i}}, {{end}}<a href='tag_{{.}}.html'>{{.}}</a>{{end}}</p>
+  <p>Tags: {{range $i, $tag := .Post.Tags}}{{if $i}}, {{end}}<a href='{{.Href}}'>{{.Name}}</a>{{end}}</p>
 </div>
 {{end}}

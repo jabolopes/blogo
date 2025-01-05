@@ -1,24 +1,23 @@
 package main
 
 import (
-	"bytes"
 	"context"
-	"fmt"
 	"io"
-	"os/exec"
+
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
 )
 
 func markdown(ctx context.Context, input io.Reader, output io.Writer) error {
-	stderr := &bytes.Buffer{}
-
-	cmd := exec.CommandContext(ctx, markdownProgram)
-	cmd.Stdin = input
-	cmd.Stdout = output
-	cmd.Stderr = stderr
-
-	if err := cmd.Run(); err != nil {
-		return fmt.Errorf("failed to run %q: %s", markdownProgram, stderr.String())
+	source, err := io.ReadAll(input)
+	if err != nil {
+		return err
 	}
 
-	return nil
+	markdown := goldmark.New(
+		goldmark.WithExtensions(
+			extension.Table,
+		),
+	)
+	return markdown.Convert(source, output)
 }

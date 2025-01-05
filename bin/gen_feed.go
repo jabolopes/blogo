@@ -39,7 +39,7 @@ func createFeedItems() ([]Item, error) {
 			content = strings.Join(lines, "\n")
 		}
 
-		postDate := post.ParsedDate.Format(feedDateFormat)
+		postDate := post.Date.Format(feedDateFormat)
 
 		item := Item{
 			post.PostTitle,

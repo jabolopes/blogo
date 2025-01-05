@@ -1,8 +1,8 @@
 {{define "content"}}
-<h4 class='allposts_header'>All tags</h4>
+<h4 class='allposts_header mb-4'>All tags</h4>
 
-<ul>
-  {{range .Tags}}<li><a href="{{.Href}}">{{.Name}}</a> &mdash; {{.Count}}</li>
+<ul class="alltags">
+  {{range .Tags}}<li><a href="{{.Tag.Href}}">{{.Tag.Name}}</a> &mdash; {{.Count}}</li>
   {{end}}
 </ul>
 {{end}}

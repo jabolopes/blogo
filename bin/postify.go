@@ -34,18 +34,25 @@ func parsePost(postFilename string) (Post, error) {
 
 		if strings.HasPrefix(line, `Date: `) {
 			line = strings.TrimPrefix(line, `Date: `)
-			post.PostDate = line
+
+			date, err := time.Parse(postParseDateFormat, line)
+			if err != nil {
+				return Post{}, fmt.Errorf("failed to parse post date %q: %v", line, err)
+			}
+
+			post.Date = date
 			continue
 		}
 
 		if strings.HasPrefix(line, "Tags: ") {
 			line = strings.TrimPrefix(line, "Tags: ")
+
 			splits := strings.Split(line, ",")
-			for i := range splits {
-				splits[i] = strings.TrimSpace(splits[i])
+			post.Tags = make([]Tag, len(splits))
+			for i, tag := range splits {
+				post.Tags[i] = Tag{strings.TrimSpace(tag)}
 			}
 
-			post.Tags = splits
 			continue
 		}
 
@@ -68,16 +75,8 @@ func parsePost(postFilename string) (Post, error) {
 		return Post{}, fmt.Errorf("post %q is missing the title", postFilename)
 	}
 
-	if len(post.PostDate) == 0 {
+	if post.Date.IsZero() {
 		return Post{}, fmt.Errorf("post %q is missing the date", postFilename)
-	}
-
-	{
-		var err error
-		post.ParsedDate, err = time.Parse(postDateFormat, post.PostDate)
-		if err != nil {
-			return Post{}, fmt.Errorf("failed to parse post date: %v", err)
-		}
 	}
 
 	return post, nil
