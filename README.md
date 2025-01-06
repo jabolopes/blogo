@@ -2,13 +2,13 @@
 
 A simple program to create blogs.
 
-![Main page screenshot](https://github.com/user-attachments/assets/ab20252f-3734-4d1c-9da5-fba9285ae0cf)
+![Main page screenshot](https://github.com/user-attachments/assets/41699026-2c70-4514-8c43-81a47fc9423c)
 
-![All posts screenshot](https://github.com/user-attachments/assets/27bfd327-39d3-4ae7-9c33-14cbb41eec8c)
+![All posts screenshot](https://github.com/user-attachments/assets/6cc61c0c-c91c-4928-a214-d9eac0753684)
 
-![All tags screenshot](https://github.com/user-attachments/assets/636cfed9-b10c-49d8-9d65-c9b8fc6512e2)
+![All tags screenshot](https://github.com/user-attachments/assets/bc414a85-f497-47ff-8b4e-fb2bafd308d0)
 
-![A tag screenshot](https://github.com/user-attachments/assets/2aec10cb-5017-4a86-8523-4c03a383cbc2)
+![A tag screenshot](https://github.com/user-attachments/assets/388173bf-9889-464d-b5bd-62d76a301269)
 
 Inspired by [bashblog](https://github.com/cfenollosa/bashblog).
 
