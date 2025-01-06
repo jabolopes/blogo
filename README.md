@@ -2,44 +2,17 @@
 
 A simple program to create blogs.
 
-I created it because I fell in love with
-[bashblog](https://github.com/cfenollosa/bashblog) but there were things I
-wanted to adapt to my own needs and hacking shell scripting wasn't
-straightforward for me.
+![Main page screenshot](https://github.com/user-attachments/assets/ab20252f-3734-4d1c-9da5-fba9285ae0cf)
 
-While bashblog still remains the option that has no (required) external
-dependencies, blogo provides a few different features that bashblog doesn't:
+![All posts screenshot](https://github.com/user-attachments/assets/27bfd327-39d3-4ae7-9c33-14cbb41eec8c)
 
-* Markdown is first class - blogo generates posts from Markdown only, it
-  doesn't generate posts from HTML. This means, in blogo there is no ambiguity
-  which is the original source document, unlike in bashblog (Markdown or
-  HTML?). Removing this ambiguity makes blog management easier.
+![All tags screenshot](https://github.com/user-attachments/assets/636cfed9-b10c-49d8-9d65-c9b8fc6512e2)
 
-* Post dates are stored inside the Markdown post itself - this feature is
-  important to me because I have many old posts that were written months or
-  years ago. bashblog made it very difficult to manage old post dates because it
-  uses a complex system of timestamps, where the timestamp can be managed by the
-  filesystem or as a special marker in the generated HTML file. In the case of
-  blogo, the post date is stored inside the post itself.
+![A tag screenshot](https://github.com/user-attachments/assets/2aec10cb-5017-4a86-8523-4c03a383cbc2)
 
-* Clear file organization - blogo organizes the files in clear subdirectories
-  and the Markdown post files are clearly separated from the rest of files, in
-  particular the output directory, the template files, and the generational
-  programs. In bashblog, all files are in the toplevel directory and it becomes
-  very difficult to distinguish between what is source and what is generated, in
-  particular if one wants to later export to a server only the generated files
-  and not the source files.
+Inspired by [bashblog](https://github.com/cfenollosa/bashblog).
 
-* Reproducible generation / builds - I wanted to have the generational process
-  (or build process) deterministic and reproducible. There's likely still work
-  to be done to make the build more deterministic but by separating the source
-  and outputs, and by treating the generation as a build process, I managed to
-  get very close to that goal.
-
-Unlike bashblog, blogo has an dependency on the [Go](https://go.dev/)
-programming language. The [Go toolchain must be
-installed](https://go.dev/doc/install). The Markdown script is included in
-blogo so it doens't have to be downloaded / installed.
+To create comic blogs see [comico](http://github.com/jabolopes/comico).
 
 ## Usage
 
