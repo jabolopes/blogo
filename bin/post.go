@@ -12,7 +12,18 @@ import (
 	"slices"
 	"strings"
 	"time"
+	"unicode"
+
+	"golang.org/x/text/runes"
+	"golang.org/x/text/transform"
+	"golang.org/x/text/unicode/norm"
 )
+
+func removeDiacritics(text string) (string, error) {
+	chain := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
+	newText, _, err := transform.String(chain, text)
+	return newText, err
+}
 
 type Tag struct {
 	// Tag name, e.g., 'poetry', 'type theory', etc.
@@ -21,7 +32,12 @@ type Tag struct {
 
 // Href returns the relative URL for a tag.
 func (t Tag) Href() string {
-	return fmt.Sprintf("tag_%s.html", url.QueryEscape(t.Name))
+	name, err := removeDiacritics(t.Name)
+	if err != nil {
+		name = t.Name
+	}
+
+	return fmt.Sprintf("tag_%s.html", url.QueryEscape(name))
 }
 
 type Post struct {
