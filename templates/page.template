@@ -28,7 +28,7 @@
         {{template "content" .}}
 
         <div id="all_posts">
-          <a href="all_posts.html">More posts</a> &mdash; <a href="all_tags.html">All tags</a> &mdash; <a href="feed.rss">Subscribe</a>
+          <a href="all-posts.html">More posts</a> &mdash; <a href="all-tags.html">All tags</a> &mdash; <a href="feed.rss">Subscribe</a>
         </div>
       </div>
     </section>

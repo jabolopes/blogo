@@ -51,16 +51,16 @@ OUT_POSTS := $(patsubst posts/%.md,out/dist/%.html,$(SRC_POSTS))
 out/dist/index.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-index > $@
 
-out/dist/all_posts.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
+out/dist/all-posts.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-all-posts > $@
 
-out/dist/all_tags.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
+out/dist/all-tags.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-all-tags > $@
 
 out/dist/feed.rss: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-feed > $@
 
-generate: $(OUT_POSTS) out/blogo out/dist/index.html out/dist/all_posts.html out/dist/all_tags.html out/dist/feed.rss $(OUT_HTML) | out/dist
+generate: $(OUT_POSTS) out/blogo out/dist/index.html out/dist/all-posts.html out/dist/all-tags.html out/dist/feed.rss $(OUT_HTML) | out/dist
 	out/blogo gen-tag
 
 print-%  : ; @echo $* = $($*)

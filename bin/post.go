@@ -37,7 +37,7 @@ func (t Tag) Href() string {
 		name = t.Name
 	}
 
-	return fmt.Sprintf("tag_%s.html", url.QueryEscape(name))
+	return fmt.Sprintf("tag-%s.html", url.QueryEscape(name))
 }
 
 type Post struct {

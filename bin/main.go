@@ -10,8 +10,8 @@ import (
 
 const (
 	pageTemplateName     = "templates/page.template"
-	allPostsTemplateName = "templates/all_posts.template"
-	allTagsTemplateName  = "templates/all_tags.template"
+	allPostsTemplateName = "templates/all-posts.template"
+	allTagsTemplateName  = "templates/all-tags.template"
 	feedTemplateName     = "templates/feed.template"
 	indexTemplateName    = "templates/index.template"
 	postTemplateName     = "templates/post.template"
