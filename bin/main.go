@@ -71,6 +71,7 @@ func main() {
 	genFeedCmd := flag.NewFlagSet("gen-feed", flag.ExitOnError)
 	genIndexCmd := flag.NewFlagSet("gen-index", flag.ExitOnError)
 	genPostCmd := flag.NewFlagSet("gen-post", flag.ExitOnError)
+	genRobotsTXTCmd := flag.NewFlagSet("gen-robots-txt", flag.ExitOnError)
 	genSitemapCmd := flag.NewFlagSet("gen-sitemap", flag.ExitOnError)
 	genTagCmd := flag.NewFlagSet("gen-tag", flag.ExitOnError)
 	postifyCmd := flag.NewFlagSet("postify", flag.ExitOnError)
@@ -106,6 +107,10 @@ func main() {
 		}
 
 		err = genPost(args[0])
+
+	case "gen-robots-txt":
+		genRobotsTXTCmd.Parse(os.Args[2:])
+		err = genRobotsTXT()
 
 	case "gen-sitemap":
 		genSitemapCmd.Parse(os.Args[2:])

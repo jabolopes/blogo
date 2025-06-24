@@ -60,10 +60,13 @@ out/dist/all-tags.html: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 out/dist/sitemap.xml: $(SRC_POSTS) out/blogo | out/dist
 	out/blogo gen-sitemap > $@
 
+out/dist/robots.txt: $(SRC_POSTS) out/blogo | out/dist
+	out/blogo gen-robots-txt > $@
+
 out/dist/feed.rss: $(SRC_POSTS) out/blogo $(SRC_TEMPLATES) | out/dist
 	out/blogo gen-feed > $@
 
-generate: $(OUT_POSTS) out/blogo out/dist/index.html out/dist/all-posts.html out/dist/all-tags.html out/dist/feed.rss out/dist/sitemap.xml $(OUT_HTML) | out/dist
+generate: $(OUT_POSTS) out/blogo out/dist/index.html out/dist/all-posts.html out/dist/all-tags.html out/dist/feed.rss out/dist/sitemap.xml out/dist/robots.txt $(OUT_HTML) | out/dist
 	out/blogo gen-tag
 
 print-%  : ; @echo $* = $($*)
